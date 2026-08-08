@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html data-lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCCP · Deck de inversión</title>
+<!-- MCCP_Pitch_Deck · build v1.0.0 · 2026-08-08 · bilingüe ES/EN (?lang=en) -->
+<!-- Copys: MCCP-Cata-Procedencia-Copys-v1.0.xlsx · columna Copy v5.0 (canónica; fallback v4.0 donde v5.0 vacía: slide 12) -->
+<!-- Identidad visual: MCCP Design System (claude.ai/design 4b36cd62-ef84-4aa3-82df-586cf7e19e8a), el empleado en «MCCP Sales Deck v2» -->
+<!-- Confidencial-interno · no indexable · slides 9 y 16 marcados «en revisión» por decisión del owner -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&display=swap');
+:root{
+  --mccp-teal:#17b39a;--mccp-teal-deep:#0f3d39;--mccp-purple:#8e3b7a;--mccp-blue:#3f6f8c;
+  --mccp-gold:#e2c391;--mccp-muted:#a3bac0;
+  --mccp-ink:#eef5f3;--mccp-ink-soft:#c3d6d1;--mccp-ink-dim:#7fa39b;
+  --mccp-bg-1:#0b2a27;--mccp-bg-2:#10262f;--mccp-bg-3:#241038;
+  --mccp-surface-card:rgba(10,24,28,.55);
+  --mccp-border-hair:rgba(255,255,255,.12);--mccp-border-teal:rgba(23,179,154,.45);
+  --mccp-grad-brand:linear-gradient(135deg,#17b39a,#8e3b7a);
+  --mccp-grad-logo:linear-gradient(135deg,#17b39a 0%,#3f6f8c 55%,#8e3b7a 100%);
+  --mccp-bg-app:radial-gradient(1200px 640px at 12% -4%, #164742 0%, transparent 52%),radial-gradient(1100px 720px at 92% 104%, #3d1743 0%, transparent 52%),linear-gradient(135deg,#0b2a27 0%,#10262f 46%,#241038 100%);
+  --mccp-ok:#12c98a;--mccp-ok-soft:#8fe6c4;--mccp-warn:#e08a4f;--mccp-warn-soft:#f0d9a8;
+  --mccp-danger:#c0552f;--mccp-danger-soft:#f0a08a;
+  --mccp-font-sans:'Archivo',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+  --mccp-font-serif:'Fraunces',Georgia,'Times New Roman',serif;
+  --mccp-ease:cubic-bezier(.2,.7,.2,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:#07100f;font-family:var(--mccp-font-sans);color:var(--mccp-ink);overflow:hidden}
+[data-lang="es"] .Len{display:none}
+[data-lang="en"] .Les{display:none}
+
+/* ---- Stage & deck chrome ---- */
+#viewport{position:fixed;inset:0;display:grid;place-items:center}
+#stage{width:1280px;height:720px;position:relative;transform-origin:center center;cursor:pointer}
+.slide{position:absolute;inset:0;width:1280px;height:720px;overflow:hidden;display:flex;flex-direction:column;
+  background:var(--mccp-bg-app);border-radius:6px;opacity:0;visibility:hidden;transition:opacity .28s var(--mccp-ease),visibility .28s}
+.slide.on{opacity:1;visibility:visible}
+#prog{position:fixed;top:0;left:0;height:3px;background:var(--mccp-grad-brand);width:0;transition:width .25s var(--mccp-ease);z-index:40}
+#hud{position:fixed;right:18px;bottom:14px;display:flex;gap:8px;align-items:center;z-index:40}
+#hud button{font-family:var(--mccp-font-sans);font-size:12px;font-weight:700;color:var(--mccp-ink-soft);
+  background:rgba(10,24,28,.7);border:1px solid var(--mccp-border-hair);border-radius:8px;padding:7px 12px;cursor:pointer;transition:all .15s var(--mccp-ease)}
+#hud button:hover{color:#fff;border-color:var(--mccp-border-teal)}
+#ctr{font-size:11px;font-weight:700;letter-spacing:1px;color:var(--mccp-ink-dim);margin-right:4px}
+#lang{position:fixed;right:18px;top:14px;display:flex;gap:0;z-index:40;border:1px solid var(--mccp-border-hair);border-radius:999px;overflow:hidden;background:rgba(10,24,28,.7)}
+#lang button{font-family:var(--mccp-font-sans);font-size:11px;font-weight:800;letter-spacing:1px;color:var(--mccp-ink-dim);
+  background:transparent;border:0;padding:6px 13px;cursor:pointer;transition:all .15s var(--mccp-ease)}
+#lang button.on{background:var(--mccp-grad-brand);color:#fff}
+
+/* ---- Slide anatomy (MCCP DS · ficha-técnica 1280×720) ---- */
+.brandbar{padding:30px 56px 0;display:flex;align-items:center;justify-content:space-between;flex:0 0 auto}
+.lockup{display:inline-flex;align-items:center;gap:13px}
+.lockup .wm{font-size:22px;font-weight:800;letter-spacing:2px;color:#fff;line-height:.95}
+.lockup .txt{border-left:2px solid var(--mccp-border-teal);padding-left:13px}
+.lockup .claim{font-family:var(--mccp-font-serif);font-size:13px;font-weight:500;font-style:italic;color:#eef7f4;display:block;margin-top:3px}
+.pageno{font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mccp-ink-dim)}
+.stage{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 56px 34px;min-height:0}
+.kick{font-size:12px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--mccp-teal)}
+.h0{font-family:var(--mccp-font-serif);font-weight:500;font-size:54px;line-height:1.08;color:#fff;margin-top:12px}
+.h0 em,.h1 em{font-style:italic;color:var(--mccp-gold)}
+.h1{font-family:var(--mccp-font-serif);font-weight:500;font-size:37px;line-height:1.12;color:#fff;margin-top:10px}
+.sub0{font-size:18px;color:var(--mccp-ink-soft);max-width:860px;margin-top:18px;line-height:1.5;text-wrap:pretty}
+.card{position:relative;overflow:hidden;background:var(--mccp-surface-card);border:1px solid var(--mccp-border-hair);border-radius:16px;padding:20px;backdrop-filter:blur(6px)}
+.card.accent::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--mccp-grad-brand)}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;border-radius:999px;padding:5px 12px;white-space:nowrap}
+.chip.reg{color:#e6d6b4;background:rgba(140,110,50,.18);border:1px solid rgba(226,195,145,.35);text-transform:none;letter-spacing:0}
+.chip.ok{color:#8fe6c4;background:rgba(18,110,80,.28);border:1px solid rgba(23,179,154,.4)}
+.chip.warn{color:#f0d9a8;background:rgba(150,90,40,.22);border:1px solid rgba(224,138,79,.45)}
+.frow{display:flex;gap:14px;padding:12px 0;border-top:1px solid rgba(255,255,255,.08);font-size:14.5px;align-items:baseline}
+.frow:first-child{border-top:0;padding-top:2px}
+.frow:last-child{padding-bottom:2px}
+.fk{flex:0 0 172px;color:#8fb5aa;font-weight:700;font-size:11px;letter-spacing:.8px;text-transform:uppercase;line-height:1.35}
+.fv{flex:1;color:#dcebe5;line-height:1.5}.fv b{color:#fff;font-weight:600}
+.kicker{margin-top:22px;font-family:var(--mccp-font-serif);font-style:italic;font-weight:500;font-size:20px;color:var(--mccp-gold);line-height:1.35}
+.kicker::before{content:"";display:inline-block;width:26px;height:3px;background:var(--mccp-grad-brand);border-radius:2px;margin-right:12px;vertical-align:middle}
+.note{margin-top:14px;font-size:10.5px;color:var(--mccp-ink-dim);line-height:1.5;max-width:1100px}
+.note b{color:var(--mccp-muted);font-weight:700}
+.chiprow{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.cols2{display:grid;grid-template-columns:1.25fr 1fr;gap:22px;align-items:start}
+.coltit{font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#8fb5aa;margin-bottom:10px}
+.si{width:44px;height:44px;border-radius:13px;background:rgba(23,179,154,.16);border:1px solid rgba(23,179,154,.35);display:grid;place-items:center;color:#8fe6c4;flex:0 0 auto}
+table.dt{width:100%;border-collapse:collapse;font-size:12.5px}
+table.dt th{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#8fb5aa;text-align:left;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.14)}
+table.dt td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.07);color:#dcebe5;line-height:1.35}
+table.dt tr.tot td{color:#fff;font-weight:700;border-top:2px solid rgba(23,179,154,.4);border-bottom:0}
+table.dt td.num{text-align:right;font-variant-numeric:tabular-nums}
+.qt{font-family:var(--mccp-font-serif);font-weight:500;font-size:44px;line-height:1.2;color:#fff;max-width:980px}
+.qt em{font-style:italic;color:var(--mccp-gold)}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div id="lang"><button data-l="es" class="on">ES</button><button data-l="en">EN</button></div>
+<div id="viewport"><div id="stage">
+<svg width="0" height="0" style="position:absolute"><defs>
+<linearGradient id="gmccp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#17b39a"/><stop offset=".55" stop-color="#3f6f8c"/><stop offset="1" stop-color="#8e3b7a"/></linearGradient>
+</defs></svg>
+
+<!-- ═══════ 01 · PORTADA ═══════ -->
+<div class="slide">
+  <div class="brandbar">
+    <span class="lockup"><svg viewBox="0 0 40 40" width="48" height="48" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg>
+      <span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno"><span class="Les">Deck de inversión · 01</span><span class="Len">Investment deck · 01</span></span>
+  </div>
+  <div class="stage">
+    <div class="h0" style="font-size:64px"><span class="Les">Tu IA responde.<br><em>Tú respondes por ella.</em></span><span class="Len">Your AI answers.<br><em>You answer for it.</em></span></div>
+    <div class="sub0" style="font-size:20px"><span class="Les">MCCP: Mensajería empresarial gobernada, auditable y defendible</span><span class="Len">MCCP: Business messaging — governed, auditable, defensible</span></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px">
+      <div class="card accent"><div class="fk" style="margin-bottom:8px"><span class="Les">Tu canal</span><span class="Len">Your channel</span></div>
+        <div style="font-size:13.5px;color:#dcebe5;line-height:1.5"><span class="Les">El canal que ya usas, sin apps nuevas. Incluido WhatsApp.</span><span class="Len">The channel you already use, no new apps. WhatsApp included.</span></div></div>
+      <div class="card accent"><div class="fk" style="margin-bottom:8px"><span class="Les">Tu dato</span><span class="Len">Your data</span></div>
+        <div style="font-size:13.5px;color:#dcebe5;line-height:1.5"><span class="Les">Cifrado bajo tu clave, en tu jurisdicción.</span><span class="Len">Encrypted under your key, in your jurisdiction.</span></div></div>
+      <div class="card accent"><div class="fk" style="margin-bottom:8px"><span class="Les">Tu IA</span><span class="Len">Your AI</span></div>
+        <div style="font-size:13.5px;color:#dcebe5;line-height:1.5"><span class="Les">Tu proveedor, tu clave, tu memoria.</span><span class="Len">Your provider, your key, your memory.</span></div></div>
+    </div>
+    <div class="kicker"><span class="Les">Democratizamos la seguridad, la gobernanza y la privacidad en canales conversacionales</span><span class="Len">We democratize security, governance and privacy in conversational channels</span></div>
+  </div>
+  <div style="position:absolute;right:56px;bottom:22px;font-size:11px;font-weight:700;letter-spacing:1.2px;color:var(--mccp-ink-dim)">WOZTELL SANUKER</div>
+</div>
+
+<!-- ═══════ 02a · PROBLEMA · Los escenarios ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno"><span class="Les">02 · Problema</span><span class="Len">02 · Problem</span></span></div>
+  <div class="stage">
+    <div class="kick"><span class="Les">02 · Problema · Los escenarios</span><span class="Len">02 · Problem · The scenarios</span></div>
+    <div class="h1"><span class="Les">Cinco conversaciones donde fallar cuesta caro. <em>No son las únicas.</em></span><span class="Len">Five conversations where failure is expensive. <em>They are not the only ones.</em></span></div>
+    <div class="card accent" style="margin-top:20px">
+      <div class="frow"><span class="fk"><span class="Les">Banca</span><span class="Len">Banking</span></span><span class="fv"><b>«<span class="Les">Devuelve primero, investiga después</span><span class="Len">Refund first, investigate later</span>»</b> — <span class="Les">le vacían la cuenta a las 22:41; hay un día para decidir.</span><span class="Len">her account is drained at 22:41; there is one day to decide.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Seguros</span><span class="Len">Insurance</span></span><span class="fv"><b>«<span class="Les">El latigazo que no prescribió</span><span class="Len">The whiplash that never expired</span>»</b> — <span class="Les">el parte se da en tres minutos; se reabre tres años después.</span><span class="Len">the claim is filed in three minutes; it reopens three years later.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Salud</span><span class="Len">Health</span></span><span class="fv"><b>«<span class="Les">La pauta no cuadra</span><span class="Len">The dosage doesn't add up</span>»</b> — <span class="Les">una hija pregunta un domingo por la noche, por su madre.</span><span class="Len">a daughter asks on a Sunday night, about her mother.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Administración</span><span class="Len">Government</span></span><span class="fv"><b>«<span class="Les">La muñeca rota de María</span><span class="Len">María's broken wrist</span>»</b> — <span class="Les">68 años, solo tiene WhatsApp. Su reclamación llega igual.</span><span class="Len">68 years old, only has WhatsApp. Her claim gets through anyway.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Seguridad</span><span class="Len">Security</span></span><span class="fv"><b>«<span class="Les">El punto seguro</span><span class="Len">The safe location</span>»</b> — <span class="Les">Nadia amplía su denuncia sin decir dónde está.</span><span class="Len">Nadia extends her report without saying where she is.</span></span></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end">
+      <div class="kicker"><span class="Les">No son datos. Son personas escribiendo en su peor momento.</span><span class="Len">This is not data. These are people writing at their worst moment.</span></div>
+      <span class="chip warn"><span class="Les">casos narrativos · personas ficticias</span><span class="Len">narrative cases · fictional people</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ 02b · PROBLEMA · La historia ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno"><span class="Les">02 · Problema</span><span class="Len">02 · Problem</span></span></div>
+  <div class="stage">
+    <div class="kick"><span class="Les">02 · Problema · La historia, y lo que hay debajo</span><span class="Len">02 · Problem · The story, and what lies beneath</span></div>
+    <div class="h1"><span class="Les">Nadia solo tiene WhatsApp. <em>Y escribe.</em></span><span class="Len">Nadia only has WhatsApp. <em>And she writes.</em></span></div>
+    <div class="card accent" style="margin-top:20px;padding:16px 20px">
+      <table class="dt">
+        <tr><th style="width:56%"><span class="Les">Lo que ella vive</span><span class="Len">What she experiences</span></th><th><span class="Les">Lo que hay debajo</span><span class="Len">What lies beneath</span></th></tr>
+        <tr><td><b style="color:#fff"><span class="Les">22:40, sin salir de casa</span><span class="Len">22:40, without leaving home</span></b> — <span class="Les">escribe como escribiría a cualquiera. Sin apps. Sin delatarse.</span><span class="Len">she writes as she would to anyone. No apps. Without giving herself away.</span></td><td><span class="Les">Canal seguro dentro del canal que ya usa</span><span class="Len">A secure channel inside the channel she already uses</span></td></tr>
+        <tr><td><b style="color:#fff"><span class="Les">La conversación se protege sola</span><span class="Len">The conversation protects itself</span></b> — <span class="Les">sala cifrada con la clave del Cuerpo, identidad verificada.</span><span class="Len">a room encrypted under the Force's key, verified identity.</span></td><td><span class="Les">Burbuja segura · identidad con doble factor</span><span class="Len">Secure bubble · two-factor identity</span></td></tr>
+        <tr><td><b style="color:#fff"><span class="Les">Cada palabra cuenta, literalmente</span><span class="Len">Every word counts, literally</span></b> — <span class="Les">su voz se transcribe y queda anclada al expediente.</span><span class="Len">her voice is transcribed and anchored to the case file.</span></td><td><span class="Les">Voz a texto · traza por interacción</span><span class="Len">Voice to text · per-interaction trace</span></td></tr>
+        <tr><td><b style="color:#fff"><span class="Les">Lo que no debe constar, no consta</span><span class="Len">What must not be on record, is not</span></b> — <span class="Les">una captura delata la casa de acogida; el sistema la rechaza.</span><span class="Len">a screenshot gives away the shelter; the system rejects it.</span></td><td><span class="Les">Moderación en todo el recorrido</span><span class="Len">Moderation across the whole journey</span></td></tr>
+        <tr><td><b style="color:#fff"><span class="Les">Una agente humana toma el control</span><span class="Len">A human agent takes over</span></b> — <span class="Les">con todo el contexto. Sin repetir nada.</span><span class="Len">with full context. Without repeating anything.</span></td><td><span class="Les">Relevo humano sin pérdida de contexto</span><span class="Len">Human handover with no loss of context</span></td></tr>
+      </table>
+    </div>
+    <div class="kicker"><span class="Les">La conversación ES el expediente.</span><span class="Len">The conversation IS the case file.</span></div>
+  </div>
+</div>
+
+<!-- ═══════ 03a · SOLUCIÓN · El dilema ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno"><span class="Les">03 · Solución</span><span class="Len">03 · Solution</span></span></div>
+  <div class="stage">
+    <div class="kick"><span class="Les">03 · Solución · El dilema</span><span class="Len">03 · Solution · The dilemma</span></div>
+    <div class="h1"><span class="Les">IA o control. <em>El mercado te obliga a elegir.</em></span><span class="Len">AI or control. <em>The market forces you to choose.</em></span></div>
+    <div class="card accent" style="margin-top:22px">
+      <div class="frow"><span class="fk"><span class="Les">La IA</span><span class="Len">The AI</span></span><span class="fv"><span class="Les">Potente, y cada mensaje sensible sale de tu perímetro.</span><span class="Len">Powerful, and every sensitive message leaves your perimeter.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">El control</span><span class="Len">The control</span></span><span class="fv"><span class="Les">Tuyo, pero renunciando a la IA que tu operación ya exige.</span><span class="Len">Yours, but at the cost of the AI your operation already demands.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">El ensamblaje</span><span class="Len">The assembly</span></span><span class="fv"><span class="Les">Venden las capas sueltas; el pegamento y el riesgo, tuyos.</span><span class="Len">They sell the layers loose; the glue and the risk are yours.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">La factura</span><span class="Len">The bill</span></span><span class="fv"><span class="Les">No llega como multa: llega como riesgo de modelo.</span><span class="Len">It doesn't arrive as a fine: it arrives as model risk.</span></span></div>
+    </div>
+    <div class="kicker"><span class="Les">MCCP existe para romper ese dilema.</span><span class="Len">MCCP exists to break that dilemma.</span></div>
+  </div>
+</div>
+
+<!-- ═══════ 03b · SOLUCIÓN · La conversación gobernada ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno"><span class="Les">03 · Solución</span><span class="Len">03 · Solution</span></span></div>
+  <div class="stage">
+    <div class="kick"><span class="Les">03 · Solución · La conversación gobernada</span><span class="Len">03 · Solution · The governed conversation</span></div>
+    <div class="h1"><span class="Les">Un chat se olvida. <em>Un caso gobernado responde.</em></span><span class="Len">A chat is forgotten. <em>A governed case answers.</em></span></div>
+    <div class="card accent" style="margin-top:22px">
+      <div class="frow"><span class="fk"><span class="Les">Identidad</span><span class="Len">Identity</span></span><span class="fv"><span class="Les">Nadie entra anónimo: roles en dos niveles y doble factor.</span><span class="Len">No one enters anonymous: two-level roles and a second factor.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Caso</span><span class="Len">Case</span></span><span class="fv"><span class="Les">La conversación deja de ser un hilo suelto; es expediente.</span><span class="Len">The conversation stops being a loose thread; it is a case file.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Moderación</span><span class="Len">Moderation</span></span><span class="fv"><span class="Les">En todo el recorrido, y con historial de lo que se frenó.</span><span class="Len">Across the whole journey, with a history of what was stopped.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Auditoría</span><span class="Len">Audit</span></span><span class="fv"><span class="Les">Quién dijo qué y cuándo, interacción a interacción.</span><span class="Len">Who said what and when, interaction by interaction.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Canal con garantías</span><span class="Len">Channel with guarantees</span></span><span class="fv"><span class="Les">Burbuja segura y videollamada con identidad.</span><span class="Len">Secure bubble and identity-verified video calls.</span></span></div>
+    </div>
+    <div class="kicker"><span class="Les">Lo que no puedes demostrar, no ha pasado.</span><span class="Len">What you cannot prove never happened.</span></div>
+  </div>
+</div>
+<!-- ═══════ 04a · PRODUCTO · La consola ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno"><span class="Les">04 · Producto</span><span class="Len">04 · Product</span></span></div>
+  <div class="stage">
+    <div class="kick"><span class="Les">04 · Producto · La consola</span><span class="Len">04 · Product · The console</span></div>
+    <div class="h1"><span class="Les">Una consola para <em>operarlo todo</em>.</span><span class="Len">One console to <em>operate it all</em>.</span></div>
+    <div class="card accent" style="margin-top:20px">
+      <div class="frow"><span class="fk"><span class="Les">Inbox único</span><span class="Len">Single inbox</span></span><span class="fv"><span class="Les">Todo WhatsApp en un solo sitio, un solo historial.</span><span class="Len">All of WhatsApp in one place, one history.</span></span></div>
+      <div class="frow"><span class="fk">Bot Builder</span><span class="fv"><span class="Les">Flujos visuales, sin código, publicación gobernada.</span><span class="Len">Visual flows, no code, governed publishing.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Omnicanalidad</span><span class="Len">Omnichannel</span></span><span class="fv"><span class="Les">Independencia del canal por diseño. Salto entre canales.</span><span class="Len">Channel independence by design. Hopping between channels.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Relevo humano</span><span class="Len">Human handover</span></span><span class="fv"><span class="Les">Un agente toma el control sin perder el contexto.</span><span class="Len">An agent takes over without losing context.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Caso y auditoría</span><span class="Len">Case &amp; audit</span></span><span class="fv"><span class="Les">La sesión nace ya auditada.</span><span class="Len">The session is born already audited.</span></span></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end">
+      <div class="kicker"><span class="Les">«Una plataforma, no un ensamblaje.»</span><span class="Len">“A platform, not an assembly.”</span></div>
+      <span class="chip reg"><span class="Les">canal desplegado hoy — WhatsApp</span><span class="Len">channel deployed today — WhatsApp</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ 04b · PRODUCTO · Los motores ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno"><span class="Les">04 · Producto</span><span class="Len">04 · Product</span></span></div>
+  <div class="stage">
+    <div class="kick"><span class="Les">04 · Producto · Los motores</span><span class="Len">04 · Product · The engines</span></div>
+    <div class="h1"><span class="Les">Bajo la consola, <em>el foso</em>.</span><span class="Len">Beneath the console, <em>the moat</em>.</span></div>
+    <div class="card accent" style="margin-top:18px">
+      <div class="frow"><span class="fk"><span class="Les">Motor de flujos</span><span class="Len">Flow engine</span></span><span class="fv"><b>«<span class="Les">Un bot probabilístico improvisa. MCCP ejecuta.</span><span class="Len">A probabilistic bot improvises. MCCP executes.</span>»</b> <span class="Les">Cada paso del flujo declara qué dato lee y escribe: flujo determinista, mínimo privilegio, auditoría.</span><span class="Len">Every step of the flow declares what data it reads and writes: deterministic flow, least privilege, audit.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Motor de seguridad</span><span class="Len">Security engine</span></span><span class="fv"><b><span class="Les">La seguridad no es una capa, es el tejido.</span><span class="Len">Security is not a layer, it is the fabric.</span></b> <span class="Les">Cifrado por organización, moderación y control transversal: controla quién entra, protege el dato, frena lo malicioso y lo acredita ante terceros.</span><span class="Len">Per-organization encryption, moderation and cross-cutting control: it governs who enters, protects the data, stops what is malicious and attests it to third parties.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">La IA, a tu elección</span><span class="Len">The AI, your choice</span></span><span class="fv"><span class="Les">El proveedor lo eliges tú, con tu clave. La IA es un componente, no el dueño.</span><span class="Len">You choose the provider, under your key. The AI is a component, not the owner.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Privacidad por diseño</span><span class="Len">Privacy by design</span></span><span class="fv"><span class="Les">Lo sensible no sale a pasear. Tú decides qué es sensible; MCCP lo expone sin que la IA vea tus datos.</span><span class="Len">Sensitive data doesn't go wandering. You decide what is sensitive; MCCP exposes it without the AI seeing your data.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Memoria</span><span class="Len">Memory</span></span><span class="fv"><span class="Les">Memoria de entidad, sesión y sistema son tuyas. Soberanía por diseño: la memoria vive en la plataforma, no en tu proveedor de IA.</span><span class="Len">Entity, session and system memory are yours. Sovereignty by design: memory lives in the platform, not in your AI provider.</span></span></div>
+    </div>
+    <div class="kicker"><span class="Les">Motores nativos. Integridad, seguridad y privacidad por diseño.</span><span class="Len">Native engines. Integrity, security and privacy by design.</span></div>
+  </div>
+</div>
+
+<!-- ═══════ 05 · VISIÓN ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno"><span class="Les">05 · Visión</span><span class="Len">05 · Vision</span></span></div>
+  <div class="stage">
+    <div class="kick"><span class="Les">05 · Visión</span><span class="Len">05 · Vision</span></div>
+    <div class="h1"><span class="Les">El sector regulado es el suelo. <em>El primer euro que entra.</em></span><span class="Len">The regulated sector is the floor. <em>The first euro in.</em></span></div>
+    <div class="cols2" style="margin-top:20px">
+      <div class="card accent">
+        <div class="frow"><span class="fk"><span class="Les">Hoy</span><span class="Len">Today</span></span><span class="fv"><span class="Les">Esta garantía solo la tiene quien puede pagársela entera.</span><span class="Len">Only those who can pay for it whole have this guarantee.</span></span></div>
+        <div class="frow"><span class="fk"><span class="Les">El techo</span><span class="Len">The ceiling</span></span><span class="fv"><span class="Les">Cualquier organización sensibilizada por la privacidad y la seguridad de sus conversaciones.</span><span class="Len">Any organization that cares about the privacy and security of its conversations.</span></span></div>
+        <div class="frow"><span class="fk"><span class="Les">De un canal a todos</span><span class="Len">From one channel to all</span></span><span class="fv"><span class="Les">La plataforma no está atada a WhatsApp.</span><span class="Len">The platform is not tied to WhatsApp.</span></span></div>
+        <div class="frow"><span class="fk"><span class="Les">De aquí hacia fuera</span><span class="Len">From here outward</span></span><span class="fv"><span class="Les">Europa, Asia, América Latina: donde ya no se llama, se escribe.</span><span class="Len">Europe, Asia, Latin America: where people no longer call, they write.</span></span></div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+        <svg viewBox="0 0 300 220" width="300" height="220" fill="none">
+          <circle cx="150" cy="110" r="100" stroke="rgba(255,255,255,.14)" stroke-width="1.4"/>
+          <circle cx="150" cy="110" r="66" stroke="rgba(226,195,145,.5)" stroke-width="1.4"/>
+          <circle cx="150" cy="110" r="33" stroke="#17b39a" stroke-width="1.8"/>
+          <circle cx="150" cy="110" r="33" fill="rgba(23,179,154,.10)"/>
+        </svg>
+        <div style="font-size:10.5px;line-height:1.7;color:var(--mccp-ink-dim);text-align:center">
+          <span style="color:#8fe6c4">● <span class="Les">público probado</span><span class="Len">public sector, proven</span></span> →
+          <span style="color:#e6d6b4"><span class="Les">regulado, primer euro</span><span class="Len">regulated, first euro</span></span> →
+          <span><span class="Les">cualquier organización</span><span class="Len">any organization</span></span><br>
+          <span class="Les">«El techo no lo pone el sector. Lo pone la conversación.»</span><span class="Len">“The ceiling isn't set by the sector. It's set by the conversation.”</span>
+        </div>
+      </div>
+    </div>
+    <div class="kicker"><span class="Les">Democratizamos la seguridad, la gobernanza y la privacidad en canales conversacionales.</span><span class="Len">We democratize security, governance and privacy in conversational channels.</span></div>
+  </div>
+</div>
+
+<!-- ═══════ 06 · WHY NOW ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno">06 · Why now</span></div>
+  <div class="stage">
+    <div class="kick">06 · Why now</div>
+    <div class="h1"><span class="Les">La IA ya está dentro. <em>Las reglas, también.</em></span><span class="Len">The AI is already inside. <em>So are the rules.</em></span></div>
+    <div class="card accent" style="margin-top:22px">
+      <div class="frow"><span class="fk"><span class="Les">El canal, decidido</span><span class="Len">Channel: decided</span></span><span class="fv"><b><span class="Les">El canal ya está decidido</span><span class="Len">The channel is already decided</span></b> — <span class="Les">tu gente escribe; no llama.</span><span class="Len">your people write; they don't call.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Las reglas, en vigor</span><span class="Len">Rules: in force</span></span><span class="fv"><b><span class="Les">Las reglas ya están en vigor</span><span class="Len">The rules are already in force</span></b> — <span class="Les">dejaron de ser cosa del año que viene.</span><span class="Len">they stopped being next year's problem.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">La IA, en producción</span><span class="Len">AI: in production</span></span><span class="fv"><b><span class="Les">La IA ya entró en producción</span><span class="Len">AI is already in production</span></b> — <span class="Les">sin gobierno, y alguien tendrá que responder.</span><span class="Len">ungoverned, and someone will have to answer.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">La categoría, creada</span><span class="Len">Category: created</span></span><span class="fv"><b><span class="Les">La categoría ya existe</span><span class="Len">The category already exists</span></b> — <span class="Les">y el capital ya está entrando.</span><span class="Len">and capital is already coming in.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Nosotros, dentro</span><span class="Len">Us: inside</span></span><span class="fv"><b><span class="Les">Nosotros ya estamos dentro</span><span class="Len">We are already inside</span></b> — <span class="Les">diez organizaciones en producción, no en piloto.</span><span class="Len">ten organizations in production, not in pilot.</span></span></div>
+    </div>
+    <div class="kicker"><span class="Les">Esta primera ventana no se abre dos veces.</span><span class="Len">This first window doesn't open twice.</span></div>
+  </div>
+</div>
+
+<!-- ═══════ 07 · MERCADO ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno"><span class="Les">07 · Mercado</span><span class="Len">07 · Market</span></span></div>
+  <div class="stage">
+    <div class="kick"><span class="Les">07 · Mercado</span><span class="Len">07 · Market</span></div>
+    <div class="h1"><span class="Les">Gobernar una conversación <em>no debería ser un lujo</em>.</span><span class="Len">Governing a conversation <em>shouldn't be a luxury</em>.</span></div>
+    <div class="card accent" style="margin-top:22px">
+      <div class="frow"><span class="fk"><span class="Les">El techo</span><span class="Len">The ceiling</span></span><span class="fv"><span class="Les">Cualquier organización sensibilizada por la privacidad y la seguridad de sus conversaciones.</span><span class="Len">Any organization that cares about the privacy and security of its conversations.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">El primer euro</span><span class="Len">The first euro</span></span><span class="fv"><span class="Les">Banca, seguros y salud: el dolor es agudo y se paga.</span><span class="Len">Banking, insurance and health: the pain is acute and it pays.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">La cuña</span><span class="Len">The wedge</span></span><span class="fv"><span class="Les">Lo público: ya estamos dentro y ya se firma.</span><span class="Len">The public sector: we are already inside and contracts are already signed.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">El canal</span><span class="Len">The channel</span></span><span class="fv"><span class="Les">Donde no se llama, se escribe: Europa, Asia, Latinoamérica.</span><span class="Len">Where people don't call, they write: Europe, Asia, Latin America.</span></span></div>
+    </div>
+    <div class="kicker"><span class="Les">Empezamos donde más duele. No terminamos ahí.</span><span class="Len">We start where it hurts most. We don't end there.</span></div>
+    <div class="note"><b><span class="Les">Nota</span><span class="Len">Note</span>:</b> <span class="Les">dimensionamiento PENDIENTE DE DECIDIR · fuente en evaluación: sanuker-group-vcla #14</span><span class="Len">sizing PENDING DECISION · source under review: sanuker-group-vcla #14</span></div>
+  </div>
+</div>
+<!-- ═══════ 08 · TRACCIÓN ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno"><span class="Les">08 · Tracción</span><span class="Len">08 · Traction</span></span></div>
+  <div class="stage">
+    <div class="kick"><span class="Les">08 · Tracción</span><span class="Len">08 · Traction</span></div>
+    <div class="h1"><span class="Les">No es una demo. <em>Ya está en producción.</em></span><span class="Len">Not a demo. <em>Already in production.</em></span></div>
+    <div class="card accent" style="margin-top:20px">
+      <div class="frow"><span class="fk"><span class="Les">Diez organizaciones</span><span class="Len">Ten organizations</span></span><span class="fv"><span class="Les">Operando con MCCP hoy, no en piloto.</span><span class="Len">Operating on MCCP today, not in pilot.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Lo público primero</span><span class="Len">Public sector first</span></span><span class="fv"><span class="Les">Donde el error tiene cara, nombre y expediente.</span><span class="Len">Where an error has a face, a name and a case file.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Contratos adjudicados</span><span class="Len">Contracts awarded</span></span><span class="fv"><span class="Les">El comprador público ya firmó.</span><span class="Len">The public buyer has already signed.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Ingeniería propia</span><span class="Len">In-house engineering</span></span><span class="fv"><span class="Les">Lo construye quien lo vende y responde.</span><span class="Len">Built by the same people who sell it and answer for it.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">La cuña, no el techo</span><span class="Len">The wedge, not the ceiling</span></span><span class="fv"><span class="Les">Entramos por lo público para llegar a todos.</span><span class="Len">We enter through the public sector to reach everyone.</span></span></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end">
+      <div class="kicker"><span class="Les">Diez ya dentro. Adjudicaciones son públicas.</span><span class="Len">Ten already in. The awards are public record.</span></div>
+      <span class="chip ok"><span class="Les">Adjudicado y facturado</span><span class="Len">Awarded and invoiced</span></span>
+    </div>
+    <div class="note"><b><span class="Les">Nota</span><span class="Len">Note</span>:</b> <span class="Les">Solution Partner de Meta desde 2019.</span><span class="Len">Meta Solution Partner since 2019.</span></div>
+  </div>
+</div>
+
+<!-- ═══════ 09 · MODELO DE NEGOCIO (en revisión) ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span style="display:flex;gap:10px;align-items:center"><span class="chip warn"><span class="Les">En revisión</span><span class="Len">Under review</span></span><span class="pageno"><span class="Les">09 · Modelo de negocio</span><span class="Len">09 · Business model</span></span></span></div>
+  <div class="stage">
+    <div class="kick"><span class="Les">09 · Modelo de negocio</span><span class="Len">09 · Business model</span></div>
+    <div class="h1"><span class="Les">Cuatro fuentes. <em>7 de cada diez euros, recurrentes.</em></span><span class="Len">Four sources. <em>7 out of every 10 euros, recurring.</em></span></div>
+    <div class="cols2" style="margin-top:18px">
+      <div class="card accent" style="padding:14px 20px">
+        <div class="frow"><span class="fk"><span class="Les">Licencias</span><span class="Len">Licenses</span></span><span class="fv"><span class="Les">La cuota por organización: casi ocho de cada diez euros.</span><span class="Len">The per-organization fee: nearly eight out of every ten euros.</span></span></div>
+        <div class="frow"><span class="fk"><span class="Les">Consumos</span><span class="Len">Usage</span></span><span class="fv"><span class="Les">Mensajes y tokens: crece con el uso, se factura con el uso.</span><span class="Len">Messages and tokens: grows with use, billed with use.</span></span></div>
+        <div class="frow"><span class="fk"><span class="Les">Ingeniería</span><span class="Len">Engineering</span></span><span class="fv"><span class="Les">Instalar, configurar e integrar; se cobra una vez, al entrar.</span><span class="Len">Install, configure, integrate; charged once, on entry.</span></span></div>
+        <div class="frow"><span class="fk"><span class="Les">El tamaño manda</span><span class="Len">Size rules</span></span><span class="fv"><span class="Les">Un municipio no paga como un banco; el mismo producto, distinto contrato.</span><span class="Len">A municipality doesn't pay like a bank; same product, different contract.</span></span></div>
+      </div>
+      <div class="card" style="padding:12px 16px">
+        <table class="dt">
+          <tr><th><span class="Les">Línea</span><span class="Len">Line</span></th><th><span class="Les">Naturaleza</span><span class="Len">Nature</span></th><th class="num"><span class="Les">% ingreso (endpoint)</span><span class="Len">% revenue (endpoint)</span></th></tr>
+          <tr><td><span class="Les">Licencias</span><span class="Len">Licenses</span></td><td><span class="Les">Recurrente</span><span class="Len">Recurring</span></td><td class="num">—</td></tr>
+          <tr><td><span class="Les">Consumos (3% del MRR, aditivo)</span><span class="Len">Usage (3% of MRR, additive)</span></td><td><span class="Les">Recurrente</span><span class="Len">Recurring</span></td><td class="num">—</td></tr>
+          <tr><td><span class="Les">Ingeniería (PaaS + conectores)</span><span class="Len">Engineering (PaaS + connectors)</span></td><td>One-off</td><td class="num">—</td></tr>
+          <tr><td><span class="Les">FDE — Ingeniería de adopción y Managed Services</span><span class="Len">FDE — Adoption engineering &amp; Managed Services</span></td><td><span class="Les">Recurrente</span><span class="Len">Recurring</span></td><td class="num">—</td></tr>
+          <tr class="tot"><td><span class="Les">TOTAL RECURRENTE</span><span class="Len">TOTAL RECURRING</span></td><td></td><td class="num"><span class="Les">aprox. 70%</span><span class="Len">approx. 70%</span></td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="kicker"><span class="Les">La implantación abre la puerta. La plataforma paga la casa.</span><span class="Len">Implementation opens the door. The platform pays for the house.</span></div>
+    <div class="note"><b>⚠️ <span class="Les">Condiciones declaradas</span><span class="Len">Declared conditions</span>:</b> <span class="Les">(a) el consumo es upside limpio SOLO si el coste de Meta y de los tokens corre en la cuenta del cliente, no en la de MCCP · (b) la implantación tiene margen positivo en la banda enterprise (+26% a +47%) pero NEGATIVO en volumen (P1 −54%, P2 −85%) a coste de mercado: el mix enterprise es lo que la hace rentable · (c) la expansión dentro de la base (NRR 108%) sigue siendo HIPÓTESIS; el BP la modela en 0.</span><span class="Len">(a) usage is clean upside ONLY if Meta and token costs are borne by the client, not by MCCP · (b) implementation has positive margin in the enterprise band (+26% to +47%) but NEGATIVE in the volume bands (P1 −54%, P2 −85%) at market cost: the enterprise mix is what makes it profitable · (c) expansion within the base (NRR 108%) remains a HYPOTHESIS; the BP models it at 0.</span></div>
+  </div>
+</div>
+
+<!-- ═══════ 10 · GO-TO-MARKET ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno">10 · Go-to-market</span></div>
+  <div class="stage">
+    <div class="kick">10 · Go-to-market</div>
+    <div class="h1"><span class="Les">Dos frentes. <em>El orden no es casual.</em></span><span class="Len">Two fronts. <em>The order is not accidental.</em></span></div>
+    <div class="card accent" style="margin-top:18px">
+      <div class="frow"><span class="fk">SaaS</span><span class="fv"><span class="Les">Proyectos hasta 50K en sector público y PoC en sector privado. Antes de firmar el PaaS + BYOK, los clientes quieren comprobar que el sistema funciona en nuestro SaaS con coste bajo y riesgo controlado. También para administración local y clientes mid-market.</span><span class="Len">Projects up to €50K in the public sector and PoCs in the private sector. Before signing PaaS + BYOK, clients want proof the system works on our SaaS at low cost and controlled risk. Also for local government and mid-market clients.</span></span></div>
+      <div class="frow"><span class="fk">PaaS</span><span class="fv"><span class="Les">Upsell natural a PaaS con soberanía de residencia y despliegue en jurisdicción del cliente. Se dispara el ARPU, para tickets entre 250-400K.</span><span class="Len">Natural upsell to PaaS with residency sovereignty and deployment in the client's jurisdiction. ARPU takes off, with tickets between €250–400K.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">El ciclo, sin maquillar</span><span class="Len">The cycle, unvarnished</span></span><span class="fv"><span class="Les">SaaS: de seis a nueve meses. PaaS: de nueve a dieciocho meses.</span><span class="Len">SaaS: six to nine months. PaaS: nine to eighteen months.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Quién vende hoy</span><span class="Len">Who sells today</span></span><span class="fv"><span class="Les">Los fundadores, con el pliego leído.</span><span class="Len">The founders, having read the tender specs.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Lo que devuelve</span><span class="Len">What it returns</span></span><span class="fv"><span class="Les">El regulado encarece la captación. Y la paga con creces. Proporción 1:5 Licencias / FDE.</span><span class="Len">The regulated sector makes acquisition more expensive. And pays it back many times over. 1:5 ratio Licenses / FDE.</span></span></div>
+    </div>
+    <div class="kicker"><span class="Les">El ciclo es largo. También lo es el contrato y el NRR.</span><span class="Len">The cycle is long. So are the contract and the NRR.</span></div>
+    <div class="note"><b><span class="Les">Nota</span><span class="Len">Note</span>:</b> <span class="Les">50.000 € está EN el umbral de licitación pública → ciclo 6-9 meses; regulado 9-18 meses · el VCLA daba CAC ~6 k$ y 10×.</span><span class="Len">€50,000 sits AT the public-tender threshold → 6–9 month cycle; regulated 9–18 months · the VCLA gave CAC ~$6K and 10×.</span></div>
+  </div>
+</div>
+
+<!-- ═══════ 11 · COMPETENCIA + EXIT-PATH ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno"><span class="Les">11 · Competencia + exit-path</span><span class="Len">11 · Competition + exit path</span></span></div>
+  <div class="stage">
+    <div class="kick"><span class="Les">11 · Competencia + exit-path</span><span class="Len">11 · Competition + exit path</span></div>
+    <div class="h1" style="font-size:33px"><span class="Les">No vigilamos el mensaje. <em>Gobernamos la conversación.</em></span><span class="Len">We don't surveil the message. <em>We govern the conversation.</em></span></div>
+    <div class="cols2" style="margin-top:16px;grid-template-columns:1.35fr 1fr">
+      <div class="card accent" style="padding:12px 20px">
+        <div class="frow"><span class="fk"><span class="Les">La categoría existe</span><span class="Len">The category exists</span></span><span class="fv"><span class="Les">Gobernar conversaciones ya tiene comprador y partida.</span><span class="Len">Governing conversations already has a buyer and a budget line.</span></span></div>
+        <div class="frow"><span class="fk"><span class="Les">El referente</span><span class="Len">The reference</span></span><span class="fv"><span class="Les">LeapXpert vende esto a la banca, y el capital le sigue.</span><span class="Len">LeapXpert sells this to banks, and capital follows it.</span></span></div>
+        <div class="frow"><span class="fk"><span class="Les">La diferencia</span><span class="Len">The difference</span></span><span class="fv"><span class="Les">Ellos miran el pasado; nosotros, el presente.</span><span class="Len">They look at the past; we look at the present.</span></span></div>
+        <div class="frow"><span class="fk"><span class="Les">El hueco europeo</span><span class="Len">The European gap</span></span><span class="fv"><span class="Les">Tu jurisdicción, tu clave, tu IA. Ahí nacimos.</span><span class="Len">Your jurisdiction, your key, your AI. That's where we were born.</span></span></div>
+        <div class="frow"><span class="fk"><span class="Les">Cumplimiento de serie</span><span class="Len">Compliance built-in</span></span><span class="fv"><b><span class="Les">Sin equipo de cumplimiento propio</span><span class="Len">No compliance team of your own</span></b> — <span class="Les">viene de serie, no lo montas tú.</span><span class="Len">it comes as standard; you don't build it.</span></span></div>
+      </div>
+      <div class="card">
+        <div class="coltit"><span class="Les">Bloque de cierre — quién compra esto</span><span class="Len">Closing block — who buys this</span></div>
+        <div style="font-size:13px;color:#dcebe5;line-height:1.55;display:flex;flex-direction:column;gap:12px">
+          <div><span class="Les">Las plataformas de seguridad están comprando las capas de gobierno que no saben construir.</span><span class="Len">Security platforms are buying the governance layers they don't know how to build.</span></div>
+          <div><span class="Les">Los grandes del cumplimiento de comunicaciones necesitan el canal que no tienen.</span><span class="Len">The communications-compliance majors need the channel they don't have.</span></div>
+          <div><span class="Les">En esta categoría se sale por adquisición estratégica, no por resistencia.</span><span class="Len">In this category, the exit is strategic acquisition, not endurance.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="kicker"><span class="Les">Ellos archivan lo que se dijo. Nosotros gobernamos lo que se dice.</span><span class="Len">They archive what was said. We govern what is being said.</span></div>
+    <div class="note"><b><span class="Les">Nota</span><span class="Len">Note</span>:</b> <span class="Les">LeapXpert seed 2019 → Series A ~$22M (2023) → Series B $20M (ene-2025, Portage); ~$56M total · Clúster: Smarsh, Global Relay, Theta Lake, Shield, Behavox, Symphony · Lakera ~$300M (Check Point), Pangea $260M (CrowdStrike), Aim ~$350M (Cato), LayerX $205M (Akamai), Prompt $180M (SentinelOne).</span><span class="Len">LeapXpert seed 2019 → Series A ~$22M (2023) → Series B $20M (Jan 2025, Portage); ~$56M total · Cluster: Smarsh, Global Relay, Theta Lake, Shield, Behavox, Symphony · Lakera ~$300M (Check Point), Pangea $260M (CrowdStrike), Aim ~$350M (Cato), LayerX $205M (Akamai), Prompt $180M (SentinelOne).</span></div>
+  </div>
+</div>
+
+<!-- ═══════ 12a · COMPLIANCE · Soberanía ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno">12 · Compliance</span></div>
+  <div class="stage">
+    <div class="kick"><span class="Les">12 · Compliance · Soberanía — dónde vive el dato</span><span class="Len">12 · Compliance · Sovereignty — where the data lives</span></div>
+    <div class="h1"><span class="Les">Tu dato no emigra. <em>Orbita donde tú decides.</em></span><span class="Len">Your data doesn't emigrate. <em>It orbits where you decide.</em></span></div>
+    <div class="card accent" style="margin-top:22px">
+      <div class="frow"><span class="fk"><span class="Les">Residencia</span><span class="Len">Residency</span></span><span class="fv"><span class="Les">Tu dato vive en tu jurisdicción, no en la de tu proveedor.</span><span class="Len">Your data lives in your jurisdiction, not your provider's.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Llaves</span><span class="Len">Keys</span></span><span class="fv"><span class="Les">El cifrado es por organización y la custodia es tuya.</span><span class="Len">Encryption is per organization and custody is yours.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">IA con tu clave</span><span class="Len">AI under your key</span></span><span class="fv"><span class="Les">Eliges el proveedor; los datos se anonimizan antes de salir.</span><span class="Len">You choose the provider; data is anonymized before it leaves.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Aislamiento</span><span class="Len">Isolation</span></span><span class="fv"><span class="Les">Cada organización, en su propio compartimento.</span><span class="Len">Each organization, in its own compartment.</span></span></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end">
+      <div class="kicker"><span class="Les">«Soberanía no es un sello. Es un domicilio.»</span><span class="Len">“Sovereignty is not a stamp. It is a domicile.”</span></div>
+      <span class="chip reg"><span class="Les">dónde vive el dato y de quién son las llaves</span><span class="Len">where the data lives and whose keys they are</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ 12b · COMPLIANCE · El marco ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno">12 · Compliance</span></div>
+  <div class="stage">
+    <div class="kick"><span class="Les">12 · Compliance · El marco — normas, fechas y estado</span><span class="Len">12 · Compliance · The framework — rules, dates and status</span></div>
+    <div class="h1"><span class="Les">El cumplimiento no es un freno. <em>Es la puerta.</em></span><span class="Len">Compliance is not a brake. <em>It is the door.</em></span></div>
+    <div class="card accent" style="margin-top:16px;padding:12px 20px">
+      <div class="frow"><span class="fk">DORA</span><span class="fv"><span class="Les">En vigor desde 2025: sin esto, en banca no te sientan a la mesa.</span><span class="Len">In force since 2025: without this, banks won't even seat you at the table.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Solvencia II</span><span class="Len">Solvency II</span></span><span class="fv"><span class="Les">El mismo listón, del lado de los seguros.</span><span class="Len">The same bar, on the insurance side.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Reglamento Europeo de IA</span><span class="Len">EU AI Act</span></span><span class="fv"><span class="Les">Alto riesgo, asumido y supervisado en España.</span><span class="Len">High risk, assumed and supervised in Spain.</span></span></div>
+      <div class="frow"><span class="fk">NIS2</span><span class="fv"><span class="Les">En transposición: alcanza al cliente antes que al proveedor.</span><span class="Len">In transposition: it reaches the client before the provider.</span></span></div>
+      <div class="frow"><span class="fk">ENS</span><span class="fv"><span class="Les">Diseñado conforme hoy. El nivel Alta, todavía no.</span><span class="Len">Designed-compliant today. The High level, not yet.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Un esfuerzo, dos mercados</span><span class="Len">One effort, two markets</span></span><span class="fv"><span class="Les">La disciplina que exige lo público es la que después firma lo regulado.</span><span class="Len">The discipline the public sector demands is the one the regulated sector later signs.</span></span></div>
+    </div>
+    <div class="kicker"><span class="Les">Nadie improvisa una barrera regulatoria. Ese es el foso.</span><span class="Len">No one improvises a regulatory barrier. That is the moat.</span></div>
+    <div class="note"><b><span class="Les">Nota</span><span class="Len">Note</span>:</b> <span class="Les">ENS Alta = BLOCKER del segmento regulado, hito Jun-Ago 2028 · Autoridad AESIA (no AEPD).</span><span class="Len">ENS High = BLOCKER for the regulated segment, milestone Jun–Aug 2028 · Authority: AESIA (not AEPD).</span></div>
+  </div>
+</div>
+<!-- ═══════ 13 · RIESGO DE PLATAFORMA ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno"><span class="Les">13 · Riesgo de plataforma</span><span class="Len">13 · Platform risk</span></span></div>
+  <div class="stage">
+    <div class="kick"><span class="Les">13 · Riesgo de plataforma</span><span class="Len">13 · Platform risk</span></div>
+    <div class="h1"><span class="Les">Hoy dependemos <em>de Meta</em>.</span><span class="Len">Today we depend <em>on Meta</em>.</span></div>
+    <div class="card accent" style="margin-top:20px">
+      <div class="frow"><span class="fk"><span class="Les">Un canal, por decisión</span><span class="Len">One channel, by decision</span></span><span class="fv"><span class="Les">WhatsApp es donde está la gente.</span><span class="Len">WhatsApp is where the people are.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Ya nos ha pasado</span><span class="Len">It has happened to us</span></span><span class="fv"><span class="Les">Meta cambió las reglas del juego. Puede volver a hacerlo.</span><span class="Len">Meta changed the rules of the game. It can do it again.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">La comoditización</span><span class="Len">Commoditization</span></span><span class="fv"><b><span class="Les">Viene de abajo</span><span class="Len">It comes from below</span></b> — <span class="Les">Meta «quita» el escalón básico al canal y se lo «regala» al cliente (pyme).</span><span class="Len">Meta “removes” the basic tier from the channel and “gifts” it to the client (SMEs).</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Lo que no vendemos</span><span class="Len">What we don't sell</span></span><span class="fv"><span class="Les">El mensaje pasa por Meta. Lo que pasa después, es nuestro.</span><span class="Len">The message passes through Meta. What happens afterwards is ours.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">La puerta abierta</span><span class="Len">The open door</span></span><span class="fv"><span class="Les">El grupo lleva hablando con Meta desde 2019.</span><span class="Len">The group has been talking with Meta since 2019.</span></span></div>
+    </div>
+    <div class="kicker"><span class="Les">El canal lo pone Meta. El gobierno del dato, nosotros.</span><span class="Len">Meta provides the channel. We provide the governance of the data.</span></div>
+  </div>
+</div>
+
+<!-- ═══════ 14 · EQUIPO ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno"><span class="Les">14 · Equipo</span><span class="Len">14 · Team</span></span></div>
+  <div class="stage">
+    <div class="kick"><span class="Les">14 · Equipo</span><span class="Len">14 · Team</span></div>
+    <div class="h1"><span class="Les">Pocos. <em>Y con las manos dentro del producto.</em></span><span class="Len">Few. <em>And hands-on inside the product.</em></span></div>
+    <div class="card accent" style="margin-top:20px">
+      <div class="frow"><span class="fk"><span class="Les">Fundadores</span><span class="Len">Founders</span></span><span class="fv"><span class="Les">José Ramón Pérez, al frente desde el día uno.</span><span class="Len">José Ramón Pérez, at the helm since day one.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Ingeniería propia</span><span class="Len">In-house engineering</span></span><span class="fv"><span class="Les">La plataforma la construye gente de casa, no un proveedor.</span><span class="Len">The platform is built by our own people, not a vendor.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">El 60% construido</span><span class="Len">60% built</span></span><span class="fv"><span class="Les">El 60% bien construido (de abajo a arriba) — todavía mucho por hacer.</span><span class="Len">60% well built (bottom-up) — still much to do.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Lo que falta</span><span class="Len">What's missing</span></span><span class="fv"><span class="Les">Un VP de Ventas y fortalecer el equipo: van con la ronda.</span><span class="Len">A VP of Sales and strengthening the team: they come with the round.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Ingeniería del grupo</span><span class="Len">Group engineering</span></span><span class="fv"><span class="Les">Capacidad accesible, socios comunes.</span><span class="Len">Accessible capacity, common partners.</span></span></div>
+    </div>
+    <div class="kicker"><span class="Les">«Seis de cada diez piezas ya están de pie. La ronda levanta el resto.»</span><span class="Len">“Six out of ten pieces are already standing. The round raises the rest.”</span></div>
+  </div>
+</div>
+
+<!-- ═══════ 15 · ESTRUCTURA SOCIETARIA ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno"><span class="Les">15 · Estructura societaria</span><span class="Len">15 · Corporate structure</span></span></div>
+  <div class="stage">
+    <div class="kick"><span class="Les">15 · Estructura societaria</span><span class="Len">15 · Corporate structure</span></div>
+    <div class="h1"><span class="Les">Cap-table limpio. <em>Nada que desenredar antes de entrar.</em></span><span class="Len">A clean cap table. <em>Nothing to untangle before coming in.</em></span></div>
+    <div class="card accent" style="margin-top:20px">
+      <div class="frow"><span class="fk"><span class="Les">Propiedad</span><span class="Len">Ownership</span></span><span class="fv"><span class="Les">Una sola matriz al 100%. Sin capas, sin herencias.</span><span class="Len">A single parent at 100%. No layers, no legacies.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Sin peaje interno</span><span class="Len">No internal toll</span></span><span class="fv"><span class="Les">La plataforma es propia: no pagamos fee al grupo.</span><span class="Len">The platform is our own: we pay no fee to the group.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Sin dependencia</span><span class="Len">No dependency</span></span><span class="fv"><span class="Les">Si el grupo no está, el producto sigue funcionando.</span><span class="Len">If the group isn't there, the product keeps working.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Entrada</span><span class="Len">Entry</span></span><span class="fv"><span class="Les">Un único vehículo, una diligencia corta.</span><span class="Len">A single vehicle, a short diligence.</span></span></div>
+    </div>
+    <div class="kicker"><span class="Les">Lo que ves en el papel es exactamente lo que se compra.</span><span class="Len">What you see on paper is exactly what is being bought.</span></div>
+    <div class="note"><b>Data room:</b> <span class="Les">escritura BISIQ 100% → Woztell Sanuker · registro/asignación de la IP de MCCP.</span><span class="Len">BISIQ 100% deed → Woztell Sanuker · MCCP IP registration/assignment.</span></div>
+  </div>
+</div>
+
+<!-- ═══════ 16 · FINANCIERO (en revisión) ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span style="display:flex;gap:10px;align-items:center"><span class="chip warn"><span class="Les">En revisión</span><span class="Len">Under review</span></span><span class="pageno"><span class="Les">16 · Financiero</span><span class="Len">16 · Financials</span></span></span></div>
+  <div class="stage">
+    <div class="kick"><span class="Les">16 · Financiero</span><span class="Len">16 · Financials</span></div>
+    <div class="h1"><span class="Les">Las cifras están modeladas. <em>Los supuestos, escritos.</em></span><span class="Len">The figures are modeled. <em>The assumptions, written down.</em></span></div>
+    <div class="card accent" style="margin-top:16px;padding:11px 20px">
+      <div class="frow"><span class="fk"><span class="Les">De dónde partimos</span><span class="Len">Where we start</span></span><span class="fv"><span class="Les">De lo que ya está firmado, no de lo que esperamos firmar.</span><span class="Len">From what is already signed, not what we hope to sign.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">La base cerrada</span><span class="Len">The closed base</span></span><span class="fv"><span class="Les">Treinta y seis meses, trazables línea a línea.</span><span class="Len">Thirty-six months, traceable line by line.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">El objetivo largo</span><span class="Len">The long target</span></span><span class="fv"><span class="Les">Casi el triple, a cuatro o cinco años.</span><span class="Len">Nearly three times, in four to five years.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Los márgenes</span><span class="Len">The margins</span></span><span class="fv"><span class="Les">Salen de la cuenta de resultados, no de una diapositiva.</span><span class="Len">They come from the P&amp;L, not from a slide.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Recurrencia</span><span class="Len">Recurrence</span></span><span class="fv"><b><span class="Les">Nueve de cada diez euros, recurrentes</span><span class="Len">Nine out of every ten euros, recurring</span></b> — <span class="Les">esto no es una casa de proyectos.</span><span class="Len">this is not a project shop.</span></span></div>
+      <div class="frow"><span class="fk">Breakeven</span><span class="fv"><b><span class="Les">En el mes dieciocho</span><span class="Len">In month eighteen</span></b> — <span class="Les">y el plan aguanta cinco meses de retraso.</span><span class="Len">and the plan withstands five months of delay.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">El puente de caja</span><span class="Len">The cash bridge</span></span><span class="fv"><span class="Les">El suelo está en el mes once, y el segundo tramo lo recompone.</span><span class="Len">The floor is in month eleven, and the second tranche rebuilds it.</span></span></div>
+    </div>
+    <div class="kicker"><span class="Les">No te pedimos que te creas el número. Te pedimos que revises el supuesto.</span><span class="Len">We're not asking you to believe the number. We're asking you to review the assumption.</span></div>
+    <div class="note"><b><span class="Les">Nota</span><span class="Len">Note</span>:</b> <span class="Les">Caja: ~750 k€ + tramo 1 (2,5 M€ M1) → suelo 2,19 M€ en M11 → tramo 2 (1,5 M€).</span><span class="Len">Cash: ~€750K + tranche 1 (€2.5M M1) → floor €2.19M in M11 → tranche 2 (€1.5M).</span></div>
+  </div>
+</div>
+
+<!-- ═══════ 17 · ASK ═══════ -->
+<div class="slide">
+  <div class="brandbar"><span class="lockup"><svg viewBox="0 0 40 40" width="42" height="42" fill="none"><path d="M20 4.5a15.5 15.5 0 0 1 14 22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/><path d="M20 35.5a15.5 15.5 0 0 1 -14 -22" stroke="url(#gmccp)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="txt"><span class="wm">MCCP</span></span></span>
+    <span class="pageno">17 · Ask</span></div>
+  <div class="stage">
+    <div class="kick">17 · Ask</div>
+    <div class="h0" style="font-size:52px"><span class="Les">Cuatro millones <em>por el 25%</em></span><span class="Len">Four million <em>for 25%</em></span></div>
+    <div class="card accent" style="margin-top:20px">
+      <div class="frow"><span class="fk"><span class="Les">La ronda</span><span class="Len">The round</span></span><span class="fv"><span class="Les">4M€ en dos tramos: uno ahora, otro contra hito de ingresos.</span><span class="Len">€4M in two tranches: one now, one against a revenue milestone.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">A qué va</span><span class="Len">Where it goes</span></span><span class="fv"><span class="Les">Terminar la plataforma, un VP Ventas, un equipo de ventas.</span><span class="Len">Finishing the platform, a VP of Sales, a sales team.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Qué compra</span><span class="Len">What it buys</span></span><span class="fv"><span class="Les">Salir de la cuña y llegar a cualquiera que no pueda permitirse fallar.</span><span class="Len">Leaving the wedge and reaching anyone who cannot afford to fail.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">Acompañada</span><span class="Len">Accompanied</span></span><span class="fv"><span class="Les">Contratos ya adjudicados, y ayudas públicas en preparación.</span><span class="Len">Contracts already awarded, and public grants in preparation.</span></span></div>
+      <div class="frow"><span class="fk"><span class="Les">El horizonte</span><span class="Len">The horizon</span></span><span class="fv"><span class="Les">Que gobernar una conversación no dependa del tamaño.</span><span class="Len">That governing a conversation no longer depends on size.</span></span></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:30px">
+      <div class="kicker" style="max-width:840px"><span class="Les">Democratizamos la seguridad, la gobernanza y la privacidad en canales conversacionales. <em>¿Listo para despegar?</em></span><span class="Len">We democratize security, governance and privacy in conversational channels. <em>Ready for takeoff?</em></span></div>
+      <span style="font-size:11px;font-weight:700;letter-spacing:1.2px;color:var(--mccp-ink-dim)">WOZTELL SANUKER</span>
+    </div>
+    <div class="note"><b><span class="Les">Nota</span><span class="Len">Note</span>:</b> <span class="Les">run-rate ≥2 M€, ~M12-13, backstop NLT M15.</span><span class="Len">run-rate ≥ €2M, ~M12–13, backstop NLT M15.</span></div>
+  </div>
+</div>
+
+</div></div>
+<div id="hud">
+  <span id="ctr">1 / 21</span>
+  <button id="pv" aria-label="Anterior">◀</button>
+  <button id="nx" aria-label="Siguiente">▶</button>
+</div>
+<script>
+const S=document.querySelectorAll('.slide');const N=S.length;let cur=1;
+function show(n){n=Math.max(1,Math.min(N,n));S.forEach((s,i)=>s.classList.toggle('on',i===n-1));cur=n;
+ document.getElementById('prog').style.width=(n/N*100)+'%';
+ document.getElementById('ctr').textContent=n+' / '+N;
+ try{history.replaceState(null,'','#'+n);}catch(e){}}
+function fit(){const st=document.getElementById('stage');const k=Math.min(innerWidth/1320,innerHeight/770)*0.985;st.style.transform='scale('+k+')';}
+addEventListener('resize',fit);
+addEventListener('hashchange',()=>{const h=parseInt((location.hash||'').replace(/[^0-9]/g,''));if(!isNaN(h)&&h>=1&&h<=N&&h!==cur)show(h);});
+addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ')show(cur+1);if(e.key==='ArrowLeft'||e.key==='PageUp')show(cur-1);if(e.key==='Home')show(1);if(e.key==='End')show(N);});
+function setLang(l){document.documentElement.setAttribute('data-lang',l);
+ document.querySelectorAll('#lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===l));
+ try{const u=new URL(location.href);if(l==='en')u.searchParams.set('lang','en');else u.searchParams.delete('lang');history.replaceState(null,'',(u.search||location.pathname)+('#'+cur));}catch(e){}}
+function init(){fit();
+ const h=parseInt((location.hash||'').replace(/[^0-9]/g,''));
+ document.getElementById('nx').onclick=()=>show(cur+1);document.getElementById('pv').onclick=()=>show(cur-1);
+ document.getElementById('stage').addEventListener('click',e=>{if(e.target.closest('button'))return;show(cur+1);});
+ document.querySelectorAll('#lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.l));
+ show(isNaN(h)||h<1?1:Math.min(h,N));
+ const p=new URLSearchParams(location.search);setLang(p.get('lang')==='en'?'en':'es');}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
+if(document.fonts&&document.fonts.ready){document.fonts.ready.then(()=>{fit();});}
+</script>
+</body>
+</html>
